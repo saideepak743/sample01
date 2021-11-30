@@ -1,0 +1,17 @@
+---
+- hosts: all
+[server1]
+[server2]
+become: true
+become_user: true
+tasks:
+-name: install nginx
+apt: name=nginx update_cache=yes state= latest
+state: present
+become: true
+-name: restart nginx
+service: name-nginx state= restarted
+become: true
+notify:
+-name: start nginx
+servicee: name=nginx state=started
